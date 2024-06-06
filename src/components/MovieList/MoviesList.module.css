@@ -1,0 +1,12 @@
+.header {
+  font-size: 28px;
+  margin-left: 20px;
+  position: fixed;
+  top: 90px;
+}
+.noFound {
+  font-size: 18px;
+  margin-left: 20px;
+  position: fixed;
+  top: 130px;
+}

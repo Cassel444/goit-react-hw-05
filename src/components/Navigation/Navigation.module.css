@@ -1,0 +1,22 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 100%;
+  gap: 8px;
+  padding: 20px;
+  border-bottom: 1px solid #808080;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+.link {
+  text-decoration: none;
+  color: black;
+}
+.link:hover {
+  text-decoration: underline;
+}
+.isActive {
+  color: crimson;
+}

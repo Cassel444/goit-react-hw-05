@@ -1,0 +1,8 @@
+.lists {
+  margin-left: 30px;
+  position: fixed;
+  top: 140px;
+}
+.item {
+  font-size: 18px;
+}
