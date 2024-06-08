@@ -1,16 +1,44 @@
-import css from "./MoviesPage.module.css";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import { searchMovies } from "../../movies-api";
+import MovieList from "../../components/MovieList/MovieList";
+import Loader from "../../components/Loader/Loader";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import NotFoundPage from "../NotFoundPage";
 
-export default function MoviesPage({ movies }) {
+function MoviesPage() {
+  const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const [searchParams] = useSearchParams();
+  const query = searchParams.get("query") ?? "";
+
+  useEffect(() => {
+    if (query) {
+      const getMovies = async () => {
+        try {
+          setIsLoading(true);
+          const data = await searchMovies(query);
+          setMovies(data.results);
+        } catch (error) {
+          setError(true);
+        } finally {
+          setIsLoading(false);
+        }
+      };
+      getMovies();
+    }
+  }, [query]);
+
   return (
-    <ul className={css.lists}>
-      {movies.map((movie) => (
-        <li className={css.item} key={movie.id}>
-          <Link to={`/${movie.id}`}>
-            <h3>{movie.title}</h3>
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <div className={CSS.box}>
+      <SearchForm />
+      {isLoading && <Loader />}
+      {error && <NotFoundPage />}
+      <MovieList movies={movies} />
+    </div>
   );
 }
+
+export default MoviesPage;

@@ -1,38 +1,27 @@
-import { useEffect, useState } from "react";
-import { getTrendingMovies } from "../../movies-api";
-import Loader from "../Loader/Loader";
-import NotFoundPage from "../../pages/NotFoundPage";
-import MoviesPage from "../../pages/MoviesPage/MoviesPage";
+import { Link } from "react-router-dom";
 import css from "./MoviesList.module.css";
+// const defaultImg =
+//   "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
-export default function MovieList() {
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(false);
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        setIsLoading(true);
-        const data = await getTrendingMovies();
-        setMovies(data);
-      } catch (error) {
-        setError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    getData();
-  }, []);
+export default function MoviesList({ movies }) {
   return (
-    <div>
-      <h1 className={css.header}>Trending today</h1>
-      {isLoading && <Loader />}
-      {error && <NotFoundPage />}
-      {!isLoading && !error && movies.length === 0 && (
-        <p className={css.noFound}>No trending movies found.</p>
-      )}
-      <MoviesPage movies={movies} />
-    </div>
+    <ul className={css.lists}>
+      {movies.map((movie) => (
+        <li key={movie.id} className={css.item}>
+          <Link to={`/movies/${movie.id}`}>
+            {/* <img
+              src={
+                movie.poster_path
+                  ? `https://image.tmdb.org/t/p/w500/${movie.poster_path}`
+                  : defaultImg
+              }
+              width={250}
+              alt="poster"
+            /> */}
+            <p>{movie.title}</p>
+          </Link>
+        </li>
+      ))}
+    </ul>
   );
 }
