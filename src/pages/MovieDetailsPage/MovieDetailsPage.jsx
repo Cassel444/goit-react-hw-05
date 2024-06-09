@@ -10,6 +10,7 @@ import { getMovieDetails } from "../../movies-api";
 import Loader from "../../components/Loader/Loader";
 import NotFoundPage from "../NotFoundPage";
 import css from "./MovieDetailsPage.module.css";
+import clsx from "clsx";
 
 const defaultImg =
   "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
@@ -22,7 +23,7 @@ function MovieDetailsPage() {
   const [error, setError] = useState(false);
 
   const location = useLocation();
-  const backLink = useRef(location.state ?? "/movies");
+  const backLink = useRef(location.state ?? "/");
 
   useEffect(() => {
     if (!movieId) return;
@@ -40,14 +41,18 @@ function MovieDetailsPage() {
     getDetails();
   }, [movieId]);
 
+  const makeLinksClass = ({ isActive }) => {
+    return clsx(css.link, isActive && css.isActive);
+  };
+
   return (
-    <div className={css.box}>
+    <div className={css.mainBox}>
       <Link to={backLink.current}>Go back</Link>
       {isLoading && <Loader />}
       {error && <NotFoundPage />}
 
       {movie && (
-        <div>
+        <div className={css.box}>
           <img
             className={css.poster}
             src={
@@ -58,20 +63,29 @@ function MovieDetailsPage() {
             width={250}
             alt="poster"
           />
-          <div>
-            <h2>{movie.title}</h2>
-            <p>{movie.overview}</p>
-            <p>Popularity: {movie.popularity}</p>
-            <p>Genres: {movie.genres.map((genre) => genre.name).join(", ")}</p>
+          <div className={css.boxAbout}>
+            <h2 className={css.title}>{movie.title}</h2>
+            <p className={css.description}>{movie.overview}</p>
+            <p className={css.span}>
+              Popularity: <span>{Math.round(movie.popularity)}</span>
+            </p>
+            <p className={css.span}>
+              Genres:{" "}
+              <span>{movie.genres.map((genre) => genre.name).join(", ")}</span>
+            </p>
           </div>
         </div>
       )}
-      <ul>
-        <li>
-          <NavLink to="cast">Cast</NavLink>
+      <ul className={css.list}>
+        <li className={css.linka}>
+          <NavLink to="cast" className={makeLinksClass}>
+            Cast
+          </NavLink>
         </li>
-        <li>
-          <NavLink to="reviews">Reviews</NavLink>
+        <li className={css.linka}>
+          <NavLink to="reviews" className={makeLinksClass}>
+            Reviews
+          </NavLink>
         </li>
       </ul>
       <Suspense fallback={null}>

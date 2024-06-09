@@ -27,7 +27,7 @@ export default function HomePage() {
 
   return (
     <div>
-      <h1 className={css.header}>Trending today</h1>
+      <h1 className={css.header}>Trending movies today</h1>
       {isLoading && <Loader />}
       {error && <NotFoundPage />}
       <MovieList movies={trendingMovies} />

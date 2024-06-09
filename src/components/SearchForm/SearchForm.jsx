@@ -1,14 +1,16 @@
-import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import css from "./SearchForm.module.css";
 
 function SearchForm() {
-  const [query, setQuery] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
-
+  const query = searchParams.get("query") ?? "";
   const handleSubmit = (e) => {
     e.preventDefault();
-    setSearchParams({ query });
+    setSearchParams({ searchParams });
+  };
+  const changeFilter = (newFilter) => {
+    searchParams.set("query", newFilter);
+    setSearchParams(searchParams);
   };
   return (
     <form className={css.box} onSubmit={handleSubmit}>
@@ -16,7 +18,7 @@ function SearchForm() {
         className={css.input}
         type="text"
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={(e) => changeFilter(e.target.value)}
       />
       <button className={css.btn} type="submit">
         Search

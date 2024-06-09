@@ -4,26 +4,30 @@
   flex-direction: row;
   gap: 10px;
   margin-left: 30px;
-  width: 300px;
+  margin-bottom: 20px;
+  width: 340px;
+  height: 40px;
 }
 .input {
-  height: 40px;
+  height: 100%;
   padding-left: 10px;
   font-size: 22px;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: -0.03em;
+  border: 1px solid rgb(29 189 135);
 }
 
 .btn {
-  width: 100px;
-  height: 50px;
-  background-color: #d3d3d3;
+  display: flex;
+  align-items: center;
+  width: 120px;
+  height: 100%;
+  background-color: rgb(29 189 135);
   border: 1px solid rgb(169, 169, 169);
-  color: #000;
   font-size: 22px;
   font-weight: 500;
   line-height: 1.5;
   letter-spacing: -0.03em;
-  padding: 10px;
+  padding: 20px;
 }

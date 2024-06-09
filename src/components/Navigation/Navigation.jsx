@@ -15,6 +15,7 @@ function Navigation() {
       <NavLink to="/movies" className={makeLinksClass}>
         Movies
       </NavLink>
+      <h2 className={css.name}>MovieScout</h2>
     </nav>
   );
 }

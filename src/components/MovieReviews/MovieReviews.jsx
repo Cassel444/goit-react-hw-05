@@ -31,19 +31,23 @@ export default function MovieReviews() {
     <div>
       {isLoading && <Loader />}
       {error && <NotFoundPage />}
-      {!reviews && <p>We don't have any reviews for this movie</p>}
-
-      <div>
-        <h2>Reviews</h2>
-        <ul className={css.list}>
-          {reviews.map((review) => (
-            <li key={review.id} className={css.item}>
-              <p>Author: {review.author}</p>
-              <p>{review.content}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
+      {reviews.length === 0 ? (
+        <p>We don't have any reviews for this movie</p>
+      ) : (
+        <div className={css.mainDiv}>
+          <h2>Reviews</h2>
+          <ul className={css.list}>
+            {reviews.map((review) => (
+              <li key={review.id} className={css.item}>
+                <div>
+                  <p className={css.name}>{review.author}</p>
+                  <p className={css.description}>{review.content}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

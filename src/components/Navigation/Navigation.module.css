@@ -16,5 +16,11 @@
   text-decoration: underline;
 }
 .isActive {
-  color: crimson;
+  color: rgb(29 189 135);
+}
+.name {
+  margin-left: auto;
+  font-size: 36px;
+  color: rgb(29 189 135);
+  text-shadow: -12px 5px 16px rgb(135 167 119);
 }
