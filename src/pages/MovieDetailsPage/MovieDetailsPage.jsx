@@ -46,7 +46,7 @@ function MovieDetailsPage() {
   };
 
   return (
-    <div className={css.mainBox}>
+    <div className={css.main}>
       <Link to={backLink.current}>Go back</Link>
       {isLoading && <Loader />}
       {error && <NotFoundPage />}
