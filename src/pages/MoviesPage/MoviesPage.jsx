@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchMovies } from "../../movies-api";
 import MovieList from "../../components/MovieList/MovieList";
@@ -32,18 +32,12 @@ function MoviesPage() {
     }
   }, [query]);
 
-  const filteredMovies = useMemo(() => {
-    return movies.filter((movie) =>
-      movie.title.toLowerCase().includes(query.toLowerCase())
-    );
-  }, [query, movies]);
-
   return (
     <div className={css.box}>
       <SearchForm />
       {isLoading && <Loader />}
       {error && <NotFoundPage />}
-      <MovieList movies={filteredMovies} />
+      <MovieList movies={movies} />
     </div>
   );
 }

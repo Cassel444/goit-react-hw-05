@@ -76,6 +76,7 @@ function MovieDetailsPage() {
           </div>
         </div>
       )}
+      <h2>Additional Information</h2>
       <ul className={css.list}>
         <li className={css.linka}>
           <NavLink to="cast" className={makeLinksClass}>

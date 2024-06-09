@@ -14,6 +14,7 @@ export default function HomePage() {
     const getData = async () => {
       try {
         setIsLoading(true);
+        setError(false);
         const data = await getTrendingMovies();
         setTrendMovie(data);
       } catch (error) {
@@ -30,7 +31,10 @@ export default function HomePage() {
       <h1 className={css.header}>Trending movies today</h1>
       {isLoading && <Loader />}
       {error && <NotFoundPage />}
-      <MovieList movies={trendingMovies} />
+      {!isLoading && !error && trendingMovies.length === 0 && (
+        <p>No trending movies available at the moment.</p>
+      )}
+      {!isLoading && !error && <MovieList movies={trendingMovies} />}
     </div>
   );
 }

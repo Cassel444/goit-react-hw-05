@@ -3,6 +3,9 @@ import css from "./MoviesList.module.css";
 
 export default function MoviesList({ movies }) {
   const location = useLocation();
+  if (movies.length === 0) {
+    return <p>No movies to display</p>;
+  }
   return (
     <ul className={css.lists}>
       {movies.map((movie) => (
